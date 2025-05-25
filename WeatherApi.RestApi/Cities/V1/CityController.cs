@@ -24,4 +24,11 @@ public class CityController: BaseController
         var result=await _commandBus.Send(command,token);
         return Ok(result);
     }
+    [HttpDelete]
+    public async Task<ActionResult> Delete(RemoveCityCommand command, CancellationToken token)
+    {
+        var result = await _commandBus.Send(command, token);
+        return Ok(result);
+    }
+
 }

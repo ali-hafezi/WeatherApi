@@ -6,7 +6,9 @@ using WeatherApi.Domain.Entities.Cities;
 
 namespace WeatherApi.Application.Command.Cities.V1;
 
-public class CityCommandHandler : IRequestHandler<RegisterCityCommand, long>
+public class CityCommandHandler : 
+    IRequestHandler<RegisterCityCommand, long>,
+    IRequestHandler<RemoveCityCommand,long>
 {
     private readonly ICityRepository repository;
 
@@ -22,5 +24,13 @@ public class CityCommandHandler : IRequestHandler<RegisterCityCommand, long>
         var city = await City.New(arg, null, token);
         await repository.Add(city,token);
         return command.Id;
+    }
+
+    public async Task<long> Handle(RemoveCityCommand command, CancellationToken token)
+    {
+        var city = await repository.Get(command.Id, token);
+        city.Remove();
+        await repository.Update(token);
+        return city.Id;
     }
 }

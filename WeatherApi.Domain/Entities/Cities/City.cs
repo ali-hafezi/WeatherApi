@@ -22,4 +22,10 @@ public class City: BaseEntity
         ///////////Logic
         return new City(arg);
     }
+    public void Remove()
+    {
+        ///////Logic
+        IsDeleted = true;
+        DeleteTime = DateTime.UtcNow;
+    }
 }

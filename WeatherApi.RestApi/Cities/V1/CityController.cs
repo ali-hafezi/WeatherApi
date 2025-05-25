@@ -21,7 +21,14 @@ public class CityController: BaseController
     [HttpPost]
     public async Task<ActionResult> Post(RegisterCityCommand command, CancellationToken token)
     {
-        var result=await _commandBus.Send(command,token);
+        var result = await _commandBus.Send(command, token);
+        return Ok(result);
+    }
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Put(long id, [FromBody] ModifyCityCommand command, CancellationToken token)
+    {
+        command.Id = id;
+        var result = await _commandBus.Send(command, token);
         return Ok(result);
     }
     [HttpDelete]

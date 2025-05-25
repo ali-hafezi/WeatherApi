@@ -17,10 +17,17 @@ public class City: BaseEntity
         Name = arg.Name;
         location= new GeoLocation { Latitude = arg.Latitude, Longitude = arg.Longitude };
     }
-    public static async Task<City> New(RegisterCityArg arg,ICityService service,CancellationToken token)
+    public static async Task<City> New(RegisterCityArg arg, ICityService service, CancellationToken token)
     {
         ///////////Logic
         return new City(arg);
+    }
+    public async Task Modify(ModifyCityArg arg, ICityService service, CancellationToken token)
+    {
+        ///////////Logic
+        Name = arg.Name ?? Name;
+        location.Latitude = arg.Latitude ?? location.Latitude;
+        location.Longitude = arg.Longitude ?? location.Longitude;
     }
     public void Remove()
     {

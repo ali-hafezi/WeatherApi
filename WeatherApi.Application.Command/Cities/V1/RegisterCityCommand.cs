@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System.Text.Json.Serialization;
 
-namespace WeatherApi.Application.Command.City;
+namespace WeatherApi.Application.Command.Cities.V1;
 
 public class RegisterCityCommand: IRequest<long>
 {

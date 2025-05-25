@@ -2,7 +2,7 @@
 using WeatherApi.Domain.Common;
 using WeatherApi.Domain.ValueObjects;
 
-namespace WeatherApi.Domain.Entities.City;
+namespace WeatherApi.Domain.Entities.Cities;
 
 public class Station:BaseEntity
 {

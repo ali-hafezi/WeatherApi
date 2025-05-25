@@ -10,4 +10,8 @@
     <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherApi.Domain\WeatherApi.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

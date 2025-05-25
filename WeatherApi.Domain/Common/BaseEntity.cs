@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WeatherApi.Domain.Common;
 
-public class BaseEntity : IComparable<BaseEntity>
+public abstract class BaseEntity : IComparable<BaseEntity>
 {
     [Key]
     public long Id { get; set; }

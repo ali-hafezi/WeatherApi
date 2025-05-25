@@ -1,6 +1,6 @@
 ﻿
 using WeatherApi.Domain.Common;
-using WeatherApi.Domain.Entities.City;
+using WeatherApi.Domain.Entities.Cities;
 using WeatherApi.Domain.ValueObjects;
 
 namespace WeatherApi.Domain.Entities.WeatherReport;

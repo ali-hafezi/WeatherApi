@@ -1,0 +1,26 @@
+﻿
+
+using MediatR;
+using WeatherApi.Application.Command.Cities.V1.Mapper;
+using WeatherApi.Domain.Entities.Cities;
+
+namespace WeatherApi.Application.Command.Cities.V1;
+
+public class CityCommandHandler : IRequestHandler<RegisterCityCommand, long>
+{
+    private readonly ICityRepository repository;
+
+    public CityCommandHandler(ICityRepository repository)
+    {
+        this.repository = repository;
+    }
+
+    public async Task<long> Handle(RegisterCityCommand command, CancellationToken token)
+    {
+        command.Id = repository.GetNextId();
+        var arg= CityMapper.Map(command);
+        var city = await City.New(arg, null, token);
+        await repository.Add(city,token);
+        return command.Id;
+    }
+}

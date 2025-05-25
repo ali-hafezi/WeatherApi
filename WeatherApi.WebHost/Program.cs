@@ -1,11 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
+
 using Microsoft.EntityFrameworkCore;
-using WeatherApi.Application.Command.City;
+using WeatherApi.Application.Command.Cities.V1;
+using WeatherApi.Domain.Entities.Cities;
 using WeatherApi.Persistence.EF;
+using WeatherApi.Persistence.EF.Hilo;
+using WeatherApi.Persistence.EF.Repositories.Cities;
 using WeatherApi.RestApi.Common;
 
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+
 
 
 var cnnString = builder.Configuration.GetConnectionString("Cnn");
@@ -21,6 +27,8 @@ builder.Services.AddMediatR(cfg => {
 builder.Services.AddScoped<ICommandBus, CommandBus>();
 builder.Services.AddScoped<IQueryBus, QueryBus>();
 
+builder.Services.AddScoped<IHiloIdGenerator, HiloIdGenerator>();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
 
 var app = builder.Build();
 

@@ -1,11 +1,11 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using WeatherApi.Application.Command.City;
+using WeatherApi.Application.Command.Cities.V1;
 using WeatherApi.RestApi.Common;
 
-namespace WeatherApi.RestApi.City.V1;
+namespace WeatherApi.RestApi.Cities.V1;
 
-[Route("api/v1.0/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 
 public class CityController: BaseController

@@ -5,7 +5,7 @@
 namespace WeatherApi.Persistence.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class _3rd : Migration
+    public partial class Hilo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

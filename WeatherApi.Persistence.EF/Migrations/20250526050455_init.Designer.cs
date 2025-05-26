@@ -12,8 +12,8 @@ using WeatherApi.Persistence.EF;
 namespace WeatherApi.Persistence.EF.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20250521143659_2nd")]
-    partial class _2nd
+    [Migration("20250526050455_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,19 @@ namespace WeatherApi.Persistence.EF.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WeatherApi.Domain.Entities.City.City", b =>
+            modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.City", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -42,7 +48,7 @@ namespace WeatherApi.Persistence.EF.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("WeatherApi.Domain.Entities.City.Station", b =>
+            modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.Station", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,6 +58,12 @@ namespace WeatherApi.Persistence.EF.Migrations
 
                     b.Property<long>("CityId")
                         .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -72,6 +84,12 @@ namespace WeatherApi.Persistence.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("RecordTime")
                         .HasColumnType("datetime2");
 
@@ -85,7 +103,7 @@ namespace WeatherApi.Persistence.EF.Migrations
                     b.ToTable("WeatherReports");
                 });
 
-            modelBuilder.Entity("WeatherApi.Domain.Entities.City.City", b =>
+            modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.City", b =>
                 {
                     b.OwnsOne("WeatherApi.Domain.ValueObjects.GeoLocation", "location", b1 =>
                         {
@@ -110,9 +128,9 @@ namespace WeatherApi.Persistence.EF.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WeatherApi.Domain.Entities.City.Station", b =>
+            modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.Station", b =>
                 {
-                    b.HasOne("WeatherApi.Domain.Entities.City.City", "City")
+                    b.HasOne("WeatherApi.Domain.Entities.Cities.City", "City")
                         .WithMany("Stations")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -145,7 +163,7 @@ namespace WeatherApi.Persistence.EF.Migrations
 
             modelBuilder.Entity("WeatherApi.Domain.Entities.WeatherReport.WeatherReport", b =>
                 {
-                    b.HasOne("WeatherApi.Domain.Entities.City.Station", "Station")
+                    b.HasOne("WeatherApi.Domain.Entities.Cities.Station", "Station")
                         .WithMany()
                         .HasForeignKey("StationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -185,7 +203,7 @@ namespace WeatherApi.Persistence.EF.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WeatherApi.Domain.Entities.City.City", b =>
+            modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.City", b =>
                 {
                     b.Navigation("Stations");
                 });

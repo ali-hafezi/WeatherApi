@@ -12,8 +12,8 @@ using WeatherApi.Persistence.EF;
 namespace WeatherApi.Persistence.EF.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20250525174326_4rth")]
-    partial class _4rth
+    [Migration("20250526050620_Hilo")]
+    partial class Hilo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

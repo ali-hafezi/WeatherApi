@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using WeatherApi.Domain.Common;
 using WeatherApi.Domain.Entities.Cities;
 using WeatherApi.Domain.Entities.WeatherReport;
 
@@ -25,5 +26,10 @@ public class WeatherDbContext :DbContext
         modelBuilder.HasSequence<long>("SQ_Hilo_Station").StartsAt(1).IncrementsBy(1);
         modelBuilder.HasSequence<long>("SQ_Hilo_WeatherReport").StartsAt(1).IncrementsBy(1);
 
+        modelBuilder.Entity<City>().HasQueryFilter(c => !c.IsDeleted);
+        modelBuilder.Entity<Station>().HasQueryFilter(c => !c.IsDeleted);
+        modelBuilder.Entity<WeatherReport>().HasQueryFilter(c => !c.IsDeleted);
+
     }
+
 }

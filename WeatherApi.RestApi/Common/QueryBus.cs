@@ -12,8 +12,8 @@ public class QueryBus : IQueryBus
         _sender = sender;
     }
 
-    public Task<TResult> Send<TResult>(IRequest<TResult> query, CancellationToken cancellationToken = default)
+    public Task<TResult> DispatchAsync<TResult>(IRequest<TResult> query, CancellationToken token = default)
     {
-        return _sender.Send(query, cancellationToken);
+        return _sender.Send(query, token);
     }
 }

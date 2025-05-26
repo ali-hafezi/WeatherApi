@@ -17,26 +17,26 @@ public class CityController: BaseController
     [HttpGet("{id}")]
     public async Task<ActionResult<GetCityDto>> Get(long id,CancellationToken token)
     {
-        var result = await _queryBus.Send(new GetCityQuery(id),token);
+        var result = await queryBus.DispatchAsync(new GetCityQuery(id),token);
         return Ok(result);
     }
     [HttpPost]
     public async Task<ActionResult> Post(RegisterCityCommand command, CancellationToken token)
     {
-        var result = await _commandBus.Send(command, token);
+        var result = await commandBus.DispatchAsync(command, token);
         return Ok(result);
     }
     [HttpPut("{id}")]
     public async Task<ActionResult> Put(long id, [FromBody] ModifyCityCommand command, CancellationToken token)
     {
         command.Id = id;
-        var result = await _commandBus.Send(command, token);
+        var result = await commandBus.DispatchAsync(command, token);
         return Ok(result);
     }
     [HttpDelete]
     public async Task<ActionResult> Delete(RemoveCityCommand command, CancellationToken token)
     {
-        var result = await _commandBus.Send(command, token);
+        var result = await commandBus.DispatchAsync(command, token);
         return Ok(result);
     }
 

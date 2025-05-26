@@ -12,8 +12,8 @@ public class CommandBus : ICommandBus
         _sender = sender;
     }
 
-    public Task<TResult> Send<TResult>(IRequest<TResult> command, CancellationToken cancellationToken = default)
+    public async Task<TResult> DispatchAsync<TResult>(IRequest<TResult> command, CancellationToken token = default)
     {
-        return _sender.Send(command, cancellationToken);
+        return await _sender.Send(command, token);
     }
 }

@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace WeatherApi.Application.Command.Cities.V1;
 
-public class ModifyCityCommand:IRequest<long>
+public record class ModifyCityCommand:IRequest<long>
 {
     [JsonIgnore] public long Id { get; set; }
     public string? Name { get; set; }

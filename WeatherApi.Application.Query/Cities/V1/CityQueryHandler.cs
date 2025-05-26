@@ -1,0 +1,35 @@
+﻿
+
+using Dapper;
+using MediatR;
+using WeatherApi.Read.Dapper.Common;
+
+namespace WeatherApi.Application.Query.Cities.V1;
+
+public class CityQueryHandler : 
+    IRequestHandler<GetCityQuery, GetCityDto>
+{
+    private IDapperQuery dapperQuery;
+    public CityQueryHandler(IDapperQuery dapperQuery)
+    {
+        this.dapperQuery = dapperQuery;
+    }
+    public async Task<GetCityDto> Handle(GetCityQuery query, CancellationToken token)
+    {
+        const string sql = "SELECT [Id]"+
+                           "   ,[Name]"+
+                           "   ,[location_Latitude]"+
+                           "   ,[location_Longitude]"+
+                           "FROM [WeatherApiCore].[dbo].[Cities]"+
+                           "Where [Id]=@Id AND [IsDeleted] = 0";
+
+        GetCityDto result;
+
+        using (var connection = dapperQuery.CreateConnection())
+        {
+            result = await connection.QueryFirstOrDefaultAsync<GetCityDto>(sql, new { query.Id });
+        }
+
+        return result;
+    }
+}

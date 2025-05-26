@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace WeatherApi.Application.Command.Cities.V1;
 
-public class RegisterCityCommand: IRequest<long>
+public record class RegisterCityCommand: IRequest<long>
 {
     [JsonIgnore]public long Id {  get; set; }
     public string Name { get; set; }

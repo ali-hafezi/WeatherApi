@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WeatherApi.Persistence.EF\WeatherApi.Persistence.EF.csproj" />
+    <ProjectReference Include="..\WeatherApi.Read.Dapper\WeatherApi.Read.Dapper.csproj" />
     <ProjectReference Include="..\WeatherApi.RestApi\WeatherApi.RestApi.csproj" />
   </ItemGroup>
 

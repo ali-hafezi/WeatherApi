@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using WeatherApi.Application.Command.Cities.V1;
+using WeatherApi.Application.Query.Cities.V1;
 using WeatherApi.RestApi.Common;
 
 namespace WeatherApi.RestApi.Cities.V1;
@@ -13,10 +14,11 @@ public class CityController: BaseController
     public CityController(ICommandBus commandBus, IQueryBus queryBus) : 
         base(commandBus, queryBus){}
 
-    [HttpGet]
-    public ActionResult Get()
+    [HttpGet("{id}")]
+    public async Task<ActionResult<GetCityDto>> Get(long id,CancellationToken token)
     {
-        return Ok("Version 1.0 - City endpoint");
+        var result = await _queryBus.Send(new GetCityQuery(id),token);
+        return Ok(result);
     }
     [HttpPost]
     public async Task<ActionResult> Post(RegisterCityCommand command, CancellationToken token)

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WeatherApi.Application.Command\WeatherApi.Application.Command.csproj" />
+    <ProjectReference Include="..\WeatherApi.Application.Query\WeatherApi.Application.Query.csproj" />
   </ItemGroup>
 
 </Project>

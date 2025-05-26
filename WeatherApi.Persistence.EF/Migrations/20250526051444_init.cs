@@ -11,12 +11,20 @@ namespace WeatherApi.Persistence.EF.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "SQ_Hilo_City");
+
+            migrationBuilder.CreateSequence(
+                name: "SQ_Hilo_Station");
+
+            migrationBuilder.CreateSequence(
+                name: "SQ_Hilo_WeatherReport");
+
             migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     location_Latitude = table.Column<double>(type: "float", nullable: false),
                     location_Longitude = table.Column<double>(type: "float", nullable: false),
@@ -32,8 +40,7 @@ namespace WeatherApi.Persistence.EF.Migrations
                 name: "Station",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location_Latitude = table.Column<double>(type: "float", nullable: false),
                     Location_Longitude = table.Column<double>(type: "float", nullable: false),
@@ -56,8 +63,7 @@ namespace WeatherApi.Persistence.EF.Migrations
                 name: "WeatherReports",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     StationId = table.Column<long>(type: "bigint", nullable: false),
                     RecordTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     WeatherData_temperature = table.Column<double>(type: "float", nullable: false),
@@ -101,6 +107,15 @@ namespace WeatherApi.Persistence.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cities");
+
+            migrationBuilder.DropSequence(
+                name: "SQ_Hilo_City");
+
+            migrationBuilder.DropSequence(
+                name: "SQ_Hilo_Station");
+
+            migrationBuilder.DropSequence(
+                name: "SQ_Hilo_WeatherReport");
         }
     }
 }

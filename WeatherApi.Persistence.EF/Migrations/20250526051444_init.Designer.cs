@@ -12,8 +12,8 @@ using WeatherApi.Persistence.EF;
 namespace WeatherApi.Persistence.EF.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20250526050620_Hilo")]
-    partial class Hilo
+    [Migration("20250526051444_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,13 +27,14 @@ namespace WeatherApi.Persistence.EF.Migrations
 
             modelBuilder.HasSequence("SQ_Hilo_City");
 
+            modelBuilder.HasSequence("SQ_Hilo_Station");
+
+            modelBuilder.HasSequence("SQ_Hilo_WeatherReport");
+
             modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.City", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
@@ -53,10 +54,7 @@ namespace WeatherApi.Persistence.EF.Migrations
             modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.Station", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("CityId")
                         .HasColumnType("bigint");
@@ -81,10 +79,7 @@ namespace WeatherApi.Persistence.EF.Migrations
             modelBuilder.Entity("WeatherApi.Domain.Entities.WeatherReport.WeatherReport", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");

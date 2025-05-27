@@ -12,7 +12,7 @@ using WeatherApi.Persistence.EF;
 namespace WeatherApi.Persistence.EF.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20250526051444_init")]
+    [Migration("20250527103650_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -26,8 +26,6 @@ namespace WeatherApi.Persistence.EF.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.HasSequence("SQ_Hilo_City");
-
-            modelBuilder.HasSequence("SQ_Hilo_Station");
 
             modelBuilder.HasSequence("SQ_Hilo_WeatherReport");
 
@@ -54,7 +52,10 @@ namespace WeatherApi.Persistence.EF.Migrations
             modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.Station", b =>
                 {
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("CityId")
                         .HasColumnType("bigint");
@@ -102,7 +103,7 @@ namespace WeatherApi.Persistence.EF.Migrations
 
             modelBuilder.Entity("WeatherApi.Domain.Entities.Cities.City", b =>
                 {
-                    b.OwnsOne("WeatherApi.Domain.ValueObjects.GeoLocation", "location", b1 =>
+                    b.OwnsOne("WeatherApi.Domain.ValueObjects.GeoLocation", "Location", b1 =>
                         {
                             b1.Property<long>("CityId")
                                 .HasColumnType("bigint");
@@ -121,7 +122,7 @@ namespace WeatherApi.Persistence.EF.Migrations
                                 .HasForeignKey("CityId");
                         });
 
-                    b.Navigation("location")
+                    b.Navigation("Location")
                         .IsRequired();
                 });
 

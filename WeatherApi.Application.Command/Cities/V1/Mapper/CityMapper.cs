@@ -25,4 +25,26 @@ public abstract class CityMapper
             Longitude = cityCommand.Longitude,
         };
     }
+    public static RegisterStationArg Map(RegisterStationCommand stationCommand)
+    {
+        return new RegisterStationArg
+        {
+            Id = stationCommand.Id,
+            Name = stationCommand.Name,
+            Latitude = stationCommand.Latitude,
+            Longitude = stationCommand.Longitude,
+            CityId = stationCommand.CityId,
+        };
+    }
+    public static ModifyStationArg Map(ModifyStationCommand stationCommand)
+    {
+        return new ModifyStationArg
+        {
+            Id = stationCommand.Id,
+            Name = stationCommand.Name,
+            Latitude = stationCommand.Latitude,
+            Longitude = stationCommand.Longitude,
+            CityId = stationCommand.CityId,
+        };
+    }
 }

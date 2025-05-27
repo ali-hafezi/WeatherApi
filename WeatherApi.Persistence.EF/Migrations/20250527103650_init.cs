@@ -15,9 +15,6 @@ namespace WeatherApi.Persistence.EF.Migrations
                 name: "SQ_Hilo_City");
 
             migrationBuilder.CreateSequence(
-                name: "SQ_Hilo_Station");
-
-            migrationBuilder.CreateSequence(
                 name: "SQ_Hilo_WeatherReport");
 
             migrationBuilder.CreateTable(
@@ -26,8 +23,8 @@ namespace WeatherApi.Persistence.EF.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    location_Latitude = table.Column<double>(type: "float", nullable: false),
-                    location_Longitude = table.Column<double>(type: "float", nullable: false),
+                    Location_Latitude = table.Column<double>(type: "float", nullable: false),
+                    Location_Longitude = table.Column<double>(type: "float", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -40,7 +37,8 @@ namespace WeatherApi.Persistence.EF.Migrations
                 name: "Station",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location_Latitude = table.Column<double>(type: "float", nullable: false),
                     Location_Longitude = table.Column<double>(type: "float", nullable: false),
@@ -110,9 +108,6 @@ namespace WeatherApi.Persistence.EF.Migrations
 
             migrationBuilder.DropSequence(
                 name: "SQ_Hilo_City");
-
-            migrationBuilder.DropSequence(
-                name: "SQ_Hilo_Station");
 
             migrationBuilder.DropSequence(
                 name: "SQ_Hilo_WeatherReport");

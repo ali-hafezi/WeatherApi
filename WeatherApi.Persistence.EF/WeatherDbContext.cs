@@ -18,12 +18,10 @@ public class WeatherDbContext :DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(WeatherDbContext).Assembly);
 
         modelBuilder.Entity<City>().Property(p => p.Id).ValueGeneratedNever();
-        modelBuilder.Entity<Station>().Property(p => p.Id).ValueGeneratedNever();
         modelBuilder.Entity<WeatherReport>().Property(p => p.Id).ValueGeneratedNever();
 
         //SEQUENCE
         modelBuilder.HasSequence<long>("SQ_Hilo_City").StartsAt(1).IncrementsBy(1);
-        modelBuilder.HasSequence<long>("SQ_Hilo_Station").StartsAt(1).IncrementsBy(1);
         modelBuilder.HasSequence<long>("SQ_Hilo_WeatherReport").StartsAt(1).IncrementsBy(1);
 
         modelBuilder.Entity<City>().HasQueryFilter(c => !c.IsDeleted);

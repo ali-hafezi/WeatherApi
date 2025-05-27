@@ -7,7 +7,7 @@ namespace WeatherApi.Domain.Entities.Cities;
 public class City: BaseEntity
 {
     public string Name { get; set; }
-    public GeoLocation location { get; set; }
+    public GeoLocation Location { get; set; }
     private readonly List<Station> _stations = [];
     public IEnumerable<Station> Stations => _stations.AsReadOnly();
     private City() { }
@@ -15,7 +15,7 @@ public class City: BaseEntity
     {
         Id = arg.Id;
         Name = arg.Name;
-        location= new GeoLocation { Latitude = arg.Latitude, Longitude = arg.Longitude };
+        Location = new GeoLocation { Latitude = arg.Latitude, Longitude = arg.Longitude };
     }
     public static async Task<City> New(RegisterCityArg arg, ICityService service, CancellationToken token)
     {
@@ -26,13 +26,27 @@ public class City: BaseEntity
     {
         ///////////Logic
         Name = arg.Name ?? Name;
-        location.Latitude = arg.Latitude ?? location.Latitude;
-        location.Longitude = arg.Longitude ?? location.Longitude;
+        Location.Latitude = arg.Latitude ?? Location.Latitude;
+        Location.Longitude = arg.Longitude ?? Location.Longitude;
     }
     public void Remove()
     {
         ///////Logic
         IsDeleted = true;
         DeleteTime = DateTime.UtcNow;
+    }
+    public async Task RegisterStation(RegisterStationArg arg, ICityService service, CancellationToken token)
+    {
+        _stations.Add(await Station.New(arg, service, token));
+    }
+    public async Task ModifyStation(ModifyStationArg arg, ICityService service, CancellationToken token)
+    {
+        var station = _stations.Find(x => x.Id == arg.Id);
+        await station.Modify(arg, service, token);
+    }
+    public void RemoveStation(long id)
+    {
+        var station = _stations.Find(x => x.Id == id);
+        station.Remove();
     }
 }

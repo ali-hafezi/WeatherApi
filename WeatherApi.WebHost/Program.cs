@@ -12,7 +12,6 @@ using WeatherApi.RestApi.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//
 var cnnString = builder.Configuration.GetConnectionString("Cnn");
 builder.Services.AddDbContext<WeatherDbContext>(options => options.UseSqlServer(cnnString));
 builder.Services.AddScoped<IDapperQuery>(provider => new DapperQuery(cnnString));

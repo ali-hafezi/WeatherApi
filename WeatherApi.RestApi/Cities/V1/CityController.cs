@@ -15,9 +15,15 @@ public class CityController: BaseController
         base(commandBus, queryBus){}
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<GetCityDto>> Get(long id,CancellationToken token)
+    public async Task<ActionResult<GetCityDto>> Get(long id, CancellationToken token)
     {
-        var result = await queryBus.DispatchAsync(new GetCityQuery(id),token);
+        var result = await queryBus.DispatchAsync(new GetCityQuery(id), token);
+        return Ok(result);
+    }
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<GetCityDto>>> Get([FromQuery]GetCitiesQuery query,CancellationToken token)
+    {
+        var result = await queryBus.DispatchAsync(query,token);
         return Ok(result);
     }
     [HttpPost]

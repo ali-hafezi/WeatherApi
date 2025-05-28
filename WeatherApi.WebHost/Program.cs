@@ -9,7 +9,7 @@ using WeatherApi.Persistence.EF.Repositories.Cities;
 using WeatherApi.Read.Dapper.Common;
 using WeatherApi.RestApi.Common;
 
-
+///////Comment !!!!!!!!
 var builder = WebApplication.CreateBuilder(args);
 
 var cnnString = builder.Configuration.GetConnectionString("Cnn");
